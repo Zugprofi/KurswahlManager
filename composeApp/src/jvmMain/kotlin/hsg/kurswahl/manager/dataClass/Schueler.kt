@@ -3,9 +3,9 @@ package hsg.kurswahl.manager.dataClass
 import kurswahlmanager.composeapp.generated.resources.Res
 
 class Schueler (
-    val Id: String,
-    val vorName: String,
-    val nachName: String,
+    val id: String,
+    val vorname: String,
+    val nachname: String,
     val mail: String,
     val fs3Id: Int? = null,
     val fs3: Fach? = null,
