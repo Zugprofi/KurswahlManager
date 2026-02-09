@@ -1,4 +1,7 @@
 package hsg.kurswahl.manager.container
 
-class SchuelerContainer {
-}
+import hsg.kurswahl.manager.dataClass.Schueler
+
+class SchuelerContainer (
+    var eintraege: MutableList<Schueler>
+)
