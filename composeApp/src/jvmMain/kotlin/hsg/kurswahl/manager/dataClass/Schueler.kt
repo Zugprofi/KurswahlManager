@@ -1,4 +1,5 @@
 package hsg.kurswahl.manager.dataClass
 
-class Schueler {
-}
+class Schueler (
+    val test: Int,
+)
