@@ -20,6 +20,11 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+            implementation("org.apache.poi:poi-ooxml:5.2.5")
+            implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
+            implementation("io.github.smyrgeorge:sqlx4k-mysql:1.0.0")
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
