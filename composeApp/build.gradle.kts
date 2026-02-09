@@ -24,6 +24,7 @@ kotlin {
             implementation("org.apache.poi:poi-ooxml:5.2.5")
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
             implementation("io.github.smyrgeorge:sqlx4k-mysql:1.0.0")
+            implementation("org.simplekotlinmail:simple-kotlin-mail-core:1.4.0")
 
         }
         commonTest.dependencies {
