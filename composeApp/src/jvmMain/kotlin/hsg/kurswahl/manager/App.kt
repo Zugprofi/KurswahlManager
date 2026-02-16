@@ -180,13 +180,13 @@ fun App(): String {
                 if (showSchueler) {
                     Text("Schüler")
                     Column {
-                        for (schueler in testSchueler) {
+                        testSchueler.forEachIndexed { index, schueler ->
                             Row {
                                 Box(
                                     Modifier
                                         .width(300.dp)
                                         .height(30.dp)
-                                        .background(colorScheme.surfaceVariant)
+                                        .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceVariant.copy(alpha = 0.8f) })
                                         .border(1.dp, colorScheme.background),
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -200,12 +200,12 @@ fun App(): String {
                                     Modifier
                                         .width(50.dp)
                                         .height(30.dp)
-                                        .background(colorScheme.surfaceVariant)
+                                        .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceVariant.copy(alpha = 0.8f) })
                                         .border(1.dp, colorScheme.background),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Text(
-                                        if (schueler.fs3),
+                                        if (schueler.asb == true) {"AsB"} else {"NsB"},
                                         style = textStyle,
                                         color = colorScheme.onSurfaceVariant
                                     )
