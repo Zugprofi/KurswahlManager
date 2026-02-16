@@ -5,7 +5,7 @@ data class Fach (
     val beizeichnung: String,
     var minSchueler: Int,
     var maxSchueler: Int,
-    var schuelerId: List<String>,
-    var schueler: List<Schueler>
 
+    val schuelerIds: MutableList<String> = mutableListOf(),
     )
+
