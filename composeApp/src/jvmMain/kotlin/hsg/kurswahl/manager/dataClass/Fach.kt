@@ -3,8 +3,8 @@ package hsg.kurswahl.manager.dataClass
 data class Fach (
     val id: Int,
     val beizeichnung: String,
-    var minSchueler: Int,
-    var maxSchueler: Int,
+    var minSchueler: Int = 0,
+    var maxSchueler: Int = 0,
 
     val schuelerIds: MutableList<String> = mutableListOf(),
     ){
