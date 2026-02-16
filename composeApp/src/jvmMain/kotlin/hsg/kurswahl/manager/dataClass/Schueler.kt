@@ -14,3 +14,6 @@ class Schueler (
     val wpuWahl2Id: List<Int>? = null,
     var wpuWahl2: List<Fach>? = null,
 )
+
+// Ich gebe dir jetzt die Fälle die eintreten können anhand der Parameter: 1. Der Schüler kann sein fs3 Fach nur zweistündig weiterführen, dann muss er aber ein wpu Fach belegen Die wpuWahl verläuft nach einer Gewichtung, der Schüler kann
+// Ich habe ein Informatikprojekt bei dem Ich aus einer Datenbank die Informationen über Schüler und Fächer gibt den Schülern anhand von ihrer Wahl Kurse zuordnet.
