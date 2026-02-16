@@ -11,7 +11,8 @@ class Schueler (
     // FS3
     val fs3Id: Int? = null,
     val fs3: Fach? = null,
-    val fs3Weiterführen: Boolean = true,
+    val fs3Weiterfuehren: Boolean = true,
+    val asb: Boolean? = null,
 
     // WPU Wahlen
     val wpuWahl1Ids: List<Int> = emptyList(), // 3 Prios
