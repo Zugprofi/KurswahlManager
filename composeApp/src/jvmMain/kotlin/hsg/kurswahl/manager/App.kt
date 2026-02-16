@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.ScrollbarStyle
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,6 +31,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import hsg.kurswahl.manager.container.*
+import hsg.kurswahl.manager.dataClass.Fach
+import hsg.kurswahl.manager.dataClass.Schueler
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -58,6 +61,46 @@ fun App(): String {
     var schuelerContainer by remember { mutableStateOf(SchuelerContainer()) }
     var fachContainer by remember { mutableStateOf(FachContainer()) }
 
+    val testSchueler = listOf(
+        Schueler(
+            "abc1",
+            "Tim",
+            "Hofmeister",
+            "empty"
+        ),
+        Schueler(
+            "def3",
+            "Michael",
+            "Morig",
+            "empty"
+        ),
+        Schueler(
+            "ckl3",
+            "Andre",
+            "Arms",
+            "empty"
+        ),
+        Schueler(
+            "kmn2",
+            "Tobias",
+            "Osterkamp",
+            "empty"
+        )
+    )
+    val testFaecher = listOf(
+        Fach(
+            1,
+            "Mathematik"
+        ),
+        Fach(
+            2,
+            "Deutsch"
+        ),
+        Fach(
+            3,
+            "Spanisch"
+        ),
+    )
     Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
         val verticalScrollState = rememberScrollState()
         val horizontalScrollState = rememberScrollState()
@@ -136,10 +179,52 @@ fun App(): String {
             {
                 if (showSchueler) {
                     Text("Schüler")
+                    Column {
+                        for (schueler in testSchueler) {
+                            Row {
+                                Box(
+                                    Modifier
+                                        .width(300.dp)
+                                        .height(30.dp)
+                                        .background(colorScheme.surfaceVariant)
+                                        .border(1.dp, colorScheme.background),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        "${schueler.nachname}, ${schueler.vorname}",
+                                        style = textStyle,
+                                        color = colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Box(
+                                    Modifier
+                                        .width(50.dp)
+                                        .height(30.dp)
+                                        .background(colorScheme.surfaceVariant)
+                                        .border(1.dp, colorScheme.background),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        if (schueler.fs3),
+                                        style = textStyle,
+                                        color = colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+
+                    //TODO
+                    //Daten anzeigen
+                    //Boxen editierbar machen, sodass Werte bearbeitet werden können
                 } else if (showFaecher) {
                     Text("Fächer")
+                    //Boxen editierbar machen, sodass Werte bearbeitet werden können
                 } else {
                     Text("Zuweisung")
+                    //Boxen editierbar machen, sodass Werte bearbeitet werden können
+                    //eigene Fachzuweisungen erlauben
                 }
             }
         }
