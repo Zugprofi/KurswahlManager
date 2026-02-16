@@ -19,7 +19,7 @@ fun verteileSchueler(
     )
 
     // WPU2 für Schüler ohne FS3
-    val schuelerOhneFs3 = schuelerListe.filter { !it.fs3Weiterführen }
+    val schuelerOhneFs3 = schuelerListe.filter { !it.fs3Weiterfuehren }
 }
 
 
