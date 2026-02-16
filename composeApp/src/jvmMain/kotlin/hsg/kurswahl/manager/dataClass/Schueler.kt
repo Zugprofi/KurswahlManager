@@ -14,9 +14,12 @@ class Schueler (
     val fs3Weiterführen: Boolean = true,
 
     // WPU Wahlen
-    val wpuWahl1Ids: List<Int>? = emptyList(), // 3 Prios
-    val wpuWahl2Ids: List<Int>? = emptyList(), // 3 Prios
+    val wpuWahl1Ids: List<Int> = emptyList(), // 3 Prios
+    val wpuWahl2Ids: List<Int> = emptyList(), // 3 Prios
 
     var wpuWahl1: List<Fach>? = null,
     var wpuWahl2: List<Fach>? = null,
+
+    var wpu1: Fach? = null,
+    var wpu2: Fach? = null
 )
