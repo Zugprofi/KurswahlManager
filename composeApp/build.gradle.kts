@@ -25,6 +25,7 @@ kotlin {
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
             implementation("io.github.smyrgeorge:sqlx4k-mysql:1.0.0")
             implementation("org.simplekotlinmail:simple-kotlin-mail-core:1.4.0")
+            implementation("org.junit.jupiter:junit-jupiter:5.9.3")
 
         }
         commonTest.dependencies {
