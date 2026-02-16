@@ -12,3 +12,15 @@ fun runSqlSmart(sql: String): List<Map<String, Any?>> {
         emptyList()
     }
 }
+
+//port 22
+//host wetzlich.name
+//ticketsystem
+//C@0.n!0PSy)ixVEu
+
+val result = runSqlSmart("SELECT * FROM users")
+
+for (row in result) {
+    println(row["id"])
+    println(row["name"])
+}
