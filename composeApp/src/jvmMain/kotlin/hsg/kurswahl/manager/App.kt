@@ -1,49 +1,148 @@
 package hsg.kurswahl.manager
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.ScrollbarStyle
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import hsg.kurswahl.manager.container.*
 
-import kurswahlmanager.composeapp.generated.resources.Res
-import kurswahlmanager.composeapp.generated.resources.compose_multiplatform
-
-@Composable
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
-fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+@Composable
+fun App(): String {
+
+    var projectTitle by remember { mutableStateOf("unbenannt") }
+    val scrollbarColor = MaterialTheme.colorScheme.secondary
+    val scrollbarStyle = ScrollbarStyle(
+        minimalHeight = 16.dp,
+        thickness = 8.dp,
+        shape = MaterialTheme.shapes.small,
+        hoverDurationMillis = 300,
+        unhoverColor = scrollbarColor.copy(alpha = 0.5f),
+        hoverColor = scrollbarColor
+    )
+    val defaultDropdownColor = colorScheme.onSurfaceVariant
+    val unavailableColor = colorScheme.error
+    val mainColor = colorScheme.primaryContainer
+    val showMissingColor = colorScheme.error
+    val dropDownColor = colorScheme.surfaceVariant
+    val textStyle = MaterialTheme.typography.labelLarge
+    val mainTextColor = colorScheme.onPrimaryContainer
+    val colorWarn = Color(0xFFF18F01)
+
+    var schuelerContainer by remember { mutableStateOf(SchuelerContainer()) }
+    var fachContainer by remember { mutableStateOf(FachContainer()) }
+
+    Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
+        val verticalScrollState = rememberScrollState()
+        val horizontalScrollState = rememberScrollState()
+
+        var showSchueler by remember { mutableStateOf(true) }
+        var showFaecher by remember { mutableStateOf(false) }
+        var showZuweisung by remember { mutableStateOf(false) }
+
+        Column(modifier = Modifier.padding(40.dp)) {
+            Row {
+                Spacer(modifier = Modifier.padding(5.dp))
+                Box(
+                    Modifier
+                        .width(100.dp)
+                        .height(30.dp)
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 10.dp,
+                                topEnd = 10.dp,
+                            )
+                        )
+                        .background(if (showSchueler) mainColor else colorScheme.surface)
+                        .clickable { showSchueler = true; showFaecher = false; showZuweisung = false }, contentAlignment = Alignment.Center
                 ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text("Schüler",
+                        style = textStyle,
+                        color = if (showSchueler) mainTextColor else colorScheme.onSurface
+                    )
+                }
+                Spacer(modifier = Modifier.padding(5.dp))
+                Box(
+                    Modifier
+                        .width(100.dp)
+                        .height(30.dp)
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 10.dp,
+                                topEnd = 10.dp,
+                            )
+                        )
+                        .background(if (showFaecher) mainColor else colorScheme.surface)
+                        .clickable { showSchueler = false; showFaecher = true; showZuweisung = false }, contentAlignment = Alignment.Center
+                ) {
+                    Text("Fächer",
+                        style = textStyle,
+                        color = if (showFaecher) mainTextColor else colorScheme.onSurface
+                    )
+                }
+                Spacer(modifier = Modifier.padding(5.dp))
+                Box(
+                    Modifier
+                        .width(100.dp)
+                        .height(30.dp)
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 10.dp,
+                                topEnd = 10.dp,
+                            )
+                        )
+                        .background(if (showZuweisung) mainColor else colorScheme.surface)
+                        .clickable { showSchueler = false; showFaecher = false; showZuweisung = true }, contentAlignment = Alignment.Center
+                ) {
+                    Text("Zuweisung",
+                        style = textStyle,
+                        color = if (showZuweisung) mainTextColor else colorScheme.onSurface
+                    )
+                }
+            }
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .clip(
+                RoundedCornerShape(10.dp)
+                )
+                .background(mainColor)
+                .padding(20.dp))
+            {
+                if (showSchueler) {
+                    Text("Schüler")
+                } else if (showFaecher) {
+                    Text("Fächer")
+                } else {
+                    Text("Zuweisung")
                 }
             }
         }
     }
+    return projectTitle
 }
