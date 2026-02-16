@@ -7,13 +7,16 @@ class Schueler (
     val vorname: String,
     val nachname: String,
     val mail: String,
+
+    // FS3
     val fs3Id: Int? = null,
     val fs3: Fach? = null,
-    val wpuWahl1Id: List<Int>? = null,
+    val fs3Weiterführen: Boolean = true,
+
+    // WPU Wahlen
+    val wpuWahl1Ids: List<Int>? = emptyList(), // 3 Prios
+    val wpuWahl2Ids: List<Int>? = emptyList(), // 3 Prios
+
     var wpuWahl1: List<Fach>? = null,
-    val wpuWahl2Id: List<Int>? = null,
     var wpuWahl2: List<Fach>? = null,
 )
-
-// Ich gebe dir jetzt die Fälle die eintreten können anhand der Parameter: 1. Der Schüler kann sein fs3 Fach nur zweistündig weiterführen, dann muss er aber ein wpu Fach belegen Die wpuWahl verläuft nach einer Gewichtung, der Schüler kann
-// Ich habe ein Informatikprojekt bei dem Ich aus einer Datenbank die Informationen über Schüler und Fächer gibt den Schülern anhand von ihrer Wahl Kurse zuordnet.
