@@ -7,5 +7,11 @@ data class Fach (
     var maxSchueler: Int,
 
     val schuelerIds: MutableList<String> = mutableListOf(),
-    )
+    ){
+    fun hatPlatz(): Boolean = schuelerIds.size < maxSchueler
+    fun fuegeSchuelerHinzu(s: Schueler) {
+        schuelerIds.add(s.id)
+    }
+    fun aktuelleAnzahl(): Int = schuelerIds.size
+}
 
