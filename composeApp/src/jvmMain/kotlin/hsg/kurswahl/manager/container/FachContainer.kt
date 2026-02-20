@@ -18,7 +18,7 @@ data class FachContainer (
     }
 
     fun getAll(): List<Fach> {
-        return this.eintraege.values.sortedBy { it.beizeichnung }
+        return this.eintraege.values.sortedBy { it.bezeichnung }
     }
 
     fun getSize(): Int {
