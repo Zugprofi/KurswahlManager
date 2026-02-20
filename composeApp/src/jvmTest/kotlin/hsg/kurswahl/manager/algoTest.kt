@@ -41,7 +41,6 @@ class VerteilServiceTest {
             )
         )
 
-        // --- Schüler mit FS3 (braucht nur 1 WPU) ---
         val schueler1 = Schueler(
             id = "S1",
             vorname = "Max",
@@ -51,7 +50,6 @@ class VerteilServiceTest {
             wpuWahl1Ids = listOf(1, 2, 3)
         )
 
-        // --- Schüler ohne FS3 (braucht 2 WPU) ---
         val schueler2 = Schueler(
             id = "S2",
             vorname = "Anna",
@@ -69,20 +67,15 @@ class VerteilServiceTest {
             )
         )
 
-        // --- Hauptfunktion aufrufen ---
         verteileSchueler(schuelerContainer, fachContainer)
 
-        // --- Assertions ---
-
-        // Schüler 1 (mit FS3) bekommt nur WPU1
         assertNotNull(schueler1.wpu1)
         assertNull(schueler1.wpu2)
 
-        // Schüler 2 (ohne FS3) bekommt zwei WPUs
+
         assertNotNull(schueler2.wpu1)
         assertNotNull(schueler2.wpu2)
 
-        // Prüfen ob Schüler wirklich im Fach eingetragen wurden
         assertTrue(fach1.schuelerIds.contains("S1"))
         assertTrue(fach1.schuelerIds.contains("S2"))
     }
