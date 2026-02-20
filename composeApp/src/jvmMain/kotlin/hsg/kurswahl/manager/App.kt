@@ -202,8 +202,6 @@ fun App(): String {
                             }
                         }
                     }
-
-
                     //TODO
                     //Daten anzeigen
                     //Boxen editierbar machen, sodass Werte bearbeitet werden können
