@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import hsg.kurswahl.manager.composeFun.DisplayBox
 import hsg.kurswahl.manager.container.*
 import hsg.kurswahl.manager.dataClass.Fach
 import hsg.kurswahl.manager.dataClass.Schueler
@@ -182,34 +183,22 @@ fun App(): String {
                     Column {
                         testSchueler.forEachIndexed { index, schueler ->
                             Row {
-                                Box(
-                                    Modifier
-                                        .width(300.dp)
-                                        .height(30.dp)
-                                        .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceVariant.copy(alpha = 0.8f) })
-                                        .border(1.dp, colorScheme.background),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        "${schueler.nachname}, ${schueler.vorname}",
-                                        style = textStyle,
-                                        color = colorScheme.onSurfaceVariant
-                                    )
-                                }
-                                Box(
-                                    Modifier
-                                        .width(50.dp)
-                                        .height(30.dp)
-                                        .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceVariant.copy(alpha = 0.8f) })
-                                        .border(1.dp, colorScheme.background),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        if (schueler.asb == true) {"AsB"} else {"NsB"},
-                                        style = textStyle,
-                                        color = colorScheme.onSurfaceVariant
-                                    )
-                                }
+                                DisplayBox(
+                                    text = "${schueler.nachname}, ${schueler.vorname}",
+                                    index = index,
+                                    width = 300.dp
+                                )
+                                DisplayBox(
+                                    text = if (schueler.asb == true) {"AsB"} else {"NsB"},
+                                    index = index,
+                                    width = 50.dp
+                                )
+                                DisplayBox(
+                                    text = schueler.wpuWahl1!!.joinToString(separator = "\n") { fach ->
+                                    fach.bezeichnung },
+                                    index = index,
+                                    width = 150.dp
+                                )
                             }
                         }
                     }
