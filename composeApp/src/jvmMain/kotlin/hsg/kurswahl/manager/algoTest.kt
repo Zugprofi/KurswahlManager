@@ -1,2 +1,0 @@
-package hsg.kurswahl.manager
-

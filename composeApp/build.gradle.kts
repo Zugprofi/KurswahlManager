@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.gradle.api.tasks.testing.Test
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -40,14 +41,18 @@ kotlin {
                 implementation("org.testcontainers:testcontainers:1.19.7")
                 implementation("org.testcontainers:mariadb:1.19.7")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-                implementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
-                runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+                implementation(kotlin("test-junit5"))
+
+
 
             }
         }
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
 
 compose.desktop {
     application {
