@@ -194,8 +194,8 @@ fun App(): String {
                                     width = 50.dp
                                 )
                                 DisplayBox(
-                                    text = schueler.wpuWahl1!!.joinToString(separator = "\n") { fach ->
-                                    fach.bezeichnung },
+                                    text = schueler.wpuWahl1?.joinToString(separator = "\n") { fach ->
+                                    fach.bezeichnung } ?: "",
                                     index = index,
                                     width = 150.dp
                                 )
