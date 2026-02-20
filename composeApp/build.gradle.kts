@@ -25,7 +25,6 @@ kotlin {
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
             implementation("io.github.smyrgeorge:sqlx4k-mysql:1.0.0")
             implementation("org.simplekotlinmail:simple-kotlin-mail-core:1.4.0")
-            implementation("org.junit.jupiter:junit-jupiter:5.9.3")
 
         }
         commonTest.dependencies {
@@ -41,6 +40,9 @@ kotlin {
                 implementation("org.testcontainers:testcontainers:1.19.7")
                 implementation("org.testcontainers:mariadb:1.19.7")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+                runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+
             }
         }
     }
