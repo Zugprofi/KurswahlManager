@@ -21,7 +21,7 @@ fun DisplayBox(text: String, index: Int, width: Dp) {
         Modifier
             .width(width)
             .height(90.dp)
-            .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceVariant.copy(alpha = 0.2f) })
+            .background(if (index % 2 == 0) { colorScheme.surfaceVariant } else { colorScheme.surfaceBright })
             .border(1.dp, colorScheme.background),
         contentAlignment = Alignment.Center
     ) {

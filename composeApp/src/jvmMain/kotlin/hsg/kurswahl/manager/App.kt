@@ -102,9 +102,9 @@ fun App(): String {
             "Spanisch"
         ),
     )
+    val verticalScrollState = rememberScrollState()
+    val horizontalScrollState = rememberScrollState()
     Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
-        val verticalScrollState = rememberScrollState()
-        val horizontalScrollState = rememberScrollState()
 
         var showSchueler by remember { mutableStateOf(true) }
         var showFaecher by remember { mutableStateOf(false) }

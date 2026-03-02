@@ -30,25 +30,9 @@ fun main() = application {
     ) {
         MenuBar {
             Menu("Datei", mnemonic = 'D') {
-                Menu("Öffnen") {
-                    Item("xlsx laden", onClick = {})
-                    Item("Datenbank laden", onClick = {})
-                }
-                Item("Schließen", onClick = {})
-            }
-            Menu("Einstellungen", mnemonic = 'D') {
-                Menu("Öffnen") {
-                    Item("xlsx laden", onClick = {})
-                    Item("Datenbank laden", onClick = {})
-                }
-                Item("Schließen", onClick = {})
-            }
-            Menu("Ansicht", mnemonic = 'D') {
-                Menu("Öffnen") {
-                    Item("xlsx laden", onClick = {})
-                    Item("Datenbank laden", onClick = {})
-                }
-                Item("Schließen", onClick = {})
+                Item("Daten öffnen", onClick = {})
+                Item("Daten speichern", onClick = {})
+                Item("Beenden", onClick = { exitApplication() })
             }
         }
         AppTheme {
