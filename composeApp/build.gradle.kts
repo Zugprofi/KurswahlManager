@@ -39,6 +39,7 @@ kotlin {
                 implementation("org.testcontainers:testcontainers:1.19.7")
                 implementation("org.testcontainers:mariadb:1.19.7")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+                implementation("org.optaplanner:optaplanner-core:9.44.0.Final")
             }
         }
     }
