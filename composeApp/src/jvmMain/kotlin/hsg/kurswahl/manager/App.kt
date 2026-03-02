@@ -67,7 +67,9 @@ fun App(): String {
             "abc1",
             "Tim",
             "Hofmeister",
-            "empty"
+            "empty",
+            wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
+            fs3Id = 11
         ),
         Schueler(
             "def3",
@@ -79,16 +81,20 @@ fun App(): String {
             "ckl3",
             "Andre",
             "Arms",
-            "empty"
+            "empty",
+            wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
+            fs3Id = 12
         ),
         Schueler(
             "kmn2",
             "Tobias",
             "Osterkamp",
-            "empty"
+            "empty",
+            wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
+            fs3Id = 13
         )
     )
-    val testFaecher = listOf(
+    val testWpus = listOf(
         Fach(
             1,
             "Mathematik"
@@ -102,6 +108,39 @@ fun App(): String {
             "Spanisch"
         ),
     )
+    val testFs3 = listOf(
+        Fach(
+            11,
+            "Englisch"
+        ),
+        Fach(
+            12,
+            "Spanisch"
+        ),
+        Fach(
+            13,
+            "Französisch"
+        ),
+    )
+
+    testSchueler.forEach { schueler ->
+        schuelerContainer.add(schueler)
+    }
+    testWpus.forEach { fach ->
+        fachContainer.add(fach)
+    }
+    testFs3.forEach { fach ->
+        fachContainer.add(fach)
+    }
+    testSchueler.forEach { schueler ->
+        schueler.fs3 = fachContainer.get(schueler.fs3Id)
+        schueler.wpuWahl1Ids.forEach { fachId ->
+            schueler.wpuWahl1.add(fachContainer.get(fachId)!!)
+        }
+        schueler.wpuWahl2Ids.forEach { fachId ->
+            schueler.wpuWahl2.add(fachContainer.get(fachId)!!)
+        }
+    }
     val verticalScrollState = rememberScrollState()
     val horizontalScrollState = rememberScrollState()
     Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
@@ -181,22 +220,25 @@ fun App(): String {
                 if (showSchueler) {
                     Text("Schüler")
                     Column {
-                        testSchueler.forEachIndexed { index, schueler ->
+                        schuelerContainer.getAll().forEachIndexed { index, schueler ->
                             Row {
                                 DisplayBox(
                                     text = "${schueler.nachname}, ${schueler.vorname}",
                                     index = index,
+                                    height = 70.dp,
                                     width = 300.dp
                                 )
                                 DisplayBox(
                                     text = if (schueler.asb == true) {"AsB"} else {"NsB"},
                                     index = index,
+                                    height = 70.dp,
                                     width = 50.dp
                                 )
                                 DisplayBox(
-                                    text = schueler.wpuWahl1?.joinToString(separator = "\n") { fach ->
+                                    text = schueler.wpuWahl1.joinToString(separator = "\n") { fach ->
                                     fach.bezeichnung } ?: "",
                                     index = index,
+                                    height = 70.dp,
                                     width = 150.dp
                                 )
                             }
@@ -207,6 +249,32 @@ fun App(): String {
                     //Boxen editierbar machen, sodass Werte bearbeitet werden können
                 } else if (showFaecher) {
                     Text("Fächer")
+                    Column {
+                        fachContainer.getAll().forEachIndexed { index, fach ->
+                            Row {
+                                DisplayBox(
+                                    text = fach.bezeichnung,
+                                    index = index,
+                                    height = 30.dp,
+                                    width = 150.dp
+                                )
+                                DisplayBox(
+                                    text = "${fach.minSchueler} - ${fach.maxSchueler}",
+                                    index = index,
+                                    height = 30.dp,
+                                    width = 50.dp,
+                                    clickAction = true,
+                                    onClick = {}
+                                )
+                                DisplayBox(
+                                    text = "${fach.schuelerIds.size}/${fach.maxSchueler}",
+                                    index = index,
+                                    height = 30.dp,
+                                    width = 50.dp
+                                )
+                            }
+                        }
+                    }
                     //Boxen editierbar machen, sodass Werte bearbeitet werden können
                 } else {
                     Text("Zuweisung")

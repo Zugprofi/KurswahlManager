@@ -5,14 +5,14 @@ import hsg.kurswahl.manager.dataClass.Schueler
 import java.util.Collections.emptyMap
 
 data class FachContainer (
-    var eintraege: MutableMap<Int, Fach> = emptyMap()
+    var eintraege: MutableMap<Int, Fach> = mutableMapOf()
 ) {
     fun add(itemToAdd: Fach) {
         val logs = mutableListOf<String>()
         this.eintraege[itemToAdd.id] = itemToAdd
     }
 
-    fun get(id: Int): Fach? {
+    fun get(id: Int?): Fach? {
         val itemToGet = this.eintraege[id]
         return itemToGet
     }

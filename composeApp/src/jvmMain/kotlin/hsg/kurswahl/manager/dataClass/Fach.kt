@@ -5,8 +5,8 @@ data class Fach (
     val bezeichnung: String,
     var minSchueler: Int = 0,
     var maxSchueler: Int = 0,
-    val schuelerIds: MutableList<String> = mutableListOf(),
-    val schueler: MutableList<Schueler> = mutableListOf()
+    var schuelerIds: MutableList<String> = mutableListOf(),
+    var schueler: MutableList<Schueler> = mutableListOf()
 )
     {
         fun hatPlatz(): Boolean = schuelerIds.size < maxSchueler
