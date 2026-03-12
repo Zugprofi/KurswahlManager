@@ -67,21 +67,18 @@ fun App(): String {
             "abc1",
             "Tim",
             "Hofmeister",
-            "empty",
             wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
             fs3Id = 11
         ),
         Schueler(
             "def3",
             "Michael",
-            "Morig",
-            "empty"
+            "Morig"
         ),
         Schueler(
             "ckl3",
             "Andre",
             "Arms",
-            "empty",
             wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
             fs3Id = 12
         ),
@@ -89,7 +86,6 @@ fun App(): String {
             "kmn2",
             "Tobias",
             "Osterkamp",
-            "empty",
             wpuWahl1Ids = listOf(1, 2, 3).toMutableList(),
             fs3Id = 13
         )

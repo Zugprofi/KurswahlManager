@@ -32,6 +32,7 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation("org.optaplanner:optaplanner-core:9.44.0.Final")
         }
         val jvmTest by getting {
             dependencies {
