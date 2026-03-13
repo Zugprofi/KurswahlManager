@@ -123,24 +123,6 @@ fun App(
         ),
     )
 
-    testSchueler.forEach { schueler ->
-        schuelerContainer.add(schueler)
-    }
-    testWpus.forEach { fach ->
-        fachContainer.add(fach)
-    }
-    testFs3.forEach { fach ->
-        fachContainer.add(fach)
-    }
-    testSchueler.forEach { schueler ->
-        schueler.fs3 = fachContainer.get(schueler.fs3Id)
-        schueler.wpuWahl1Ids.forEach { fachId ->
-            schueler.wpuWahl1.add(fachContainer.get(fachId)!!)
-        }
-        schueler.wpuWahl2Ids.forEach { fachId ->
-            schueler.wpuWahl2.add(fachContainer.get(fachId)!!)
-        }
-    }
     Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
         var showSchueler by remember { mutableStateOf(true) }
         var showFaecher by remember { mutableStateOf(false) }
