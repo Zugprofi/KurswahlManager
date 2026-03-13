@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.background
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.ScrollbarStyle
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -27,10 +27,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.font.FontWeight
 import hsg.kurswahl.manager.composeFun.DisplayBox
+import hsg.kurswahl.manager.composeFun.FachConfigDialog
 import hsg.kurswahl.manager.container.*
 import hsg.kurswahl.manager.dataClass.Fach
 import hsg.kurswahl.manager.dataClass.Schueler
@@ -141,14 +144,10 @@ fun App(): String {
             schueler.wpuWahl2.add(fachContainer.get(fachId)!!)
         }
     }
-    val verticalScrollState = rememberScrollState()
-    val horizontalScrollState = rememberScrollState()
     Box(Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
-
         var showSchueler by remember { mutableStateOf(true) }
         var showFaecher by remember { mutableStateOf(false) }
         var showZuweisung by remember { mutableStateOf(false) }
-
         Column(modifier = Modifier.padding(40.dp)) {
             Row {
                 Spacer(modifier = Modifier.padding(5.dp))
@@ -251,6 +250,7 @@ fun App(): String {
                     Text("Fächer")
                     Column {
                         fachContainer.getAll().forEachIndexed { index, fach ->
+                            var showThisFachDialog by remember { mutableStateOf(false) }
                             Row {
                                 DisplayBox(
                                     text = fach.bezeichnung,
@@ -264,13 +264,24 @@ fun App(): String {
                                     height = 30.dp,
                                     width = 50.dp,
                                     clickAction = true,
-                                    onClick = {}
+                                    onClick = {
+                                        showThisFachDialog = true
+                                    }
                                 )
                                 DisplayBox(
                                     text = "${fach.schuelerIds.size}/${fach.maxSchueler}",
                                     index = index,
                                     height = 30.dp,
                                     width = 50.dp
+                                )
+                            }
+                            if (showThisFachDialog) {
+                                FachConfigDialog(
+                                    fachId = fach.id,
+                                    container = fachContainer,
+                                    onDismiss = {
+                                        showThisFachDialog = false
+                                    },
                                 )
                             }
                         }
