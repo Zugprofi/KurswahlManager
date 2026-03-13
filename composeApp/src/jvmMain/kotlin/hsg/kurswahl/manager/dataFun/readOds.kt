@@ -49,18 +49,20 @@ fun readOdsFromResources(schuelerContainer: SchuelerContainer) {
         sheet.getCellByPosition(16, row).stringValue.toIntOrNull()?.let { wpu2.add(it) }
 
         // Schueler-Objekt erstellen
-        val schueler = Schueler(
-            id = id,
-            vorname = vorname,
-            nachname = nachname,
-            mail = "", // Mail steht nicht in Tabelle
-            fs3Id = fs3Id,
-            wpuWahl1Ids = wpu1,
-            wpuWahl2Ids = wpu2
-        )
-
-        // In Container speichern
-        schuelerContainer.add(schueler)
+        if (vorname != null && nachname != null && id != null) {
+            val schueler = Schueler(
+                id = id,
+                vorname = vorname,
+                nachname = nachname,
+                mail = "", // Mail steht nicht in Tabelle
+                fs3Id = fs3Id,
+                wpuWahl1Ids = wpu1,
+                wpuWahl2Ids = wpu2
+            )
+            schuelerContainer.add(schueler)
+        } else {
+            break
+        }
     }
 
     println("Import abgeschlossen: ${schuelerContainer.getSize()} Schüler geladen.")
