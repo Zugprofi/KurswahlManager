@@ -33,7 +33,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.font.FontWeight
 import hsg.kurswahl.manager.composeFun.DisplayBox
-import hsg.kurswahl.manager.composeFun.FachConfigDialog
 import hsg.kurswahl.manager.container.*
 import hsg.kurswahl.manager.dataClass.Fach
 import hsg.kurswahl.manager.dataClass.Schueler
@@ -233,7 +232,7 @@ fun App(
                                 )
                                 DisplayBox(
                                     text = schueler.wpuWahl1.joinToString(separator = "\n") { fach ->
-                                    fach.bezeichnung } ?: "",
+                                    fach.bezeichnung },
                                     index = index,
                                     height = 70.dp,
                                     width = 150.dp
@@ -260,26 +259,13 @@ fun App(
                                     text = "${fach.minSchueler} - ${fach.maxSchueler}",
                                     index = index,
                                     height = 30.dp,
-                                    width = 50.dp,
-                                    clickAction = true,
-                                    onClick = {
-                                        showThisFachDialog = true
-                                    }
+                                    width = 50.dp
                                 )
                                 DisplayBox(
                                     text = "${fach.schuelerIds.size}/${fach.maxSchueler}",
                                     index = index,
                                     height = 30.dp,
                                     width = 50.dp
-                                )
-                            }
-                            if (showThisFachDialog) {
-                                FachConfigDialog(
-                                    fachId = fach.id,
-                                    container = fachContainer,
-                                    onDismiss = {
-                                        showThisFachDialog = false
-                                    },
                                 )
                             }
                         }
