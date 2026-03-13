@@ -21,7 +21,7 @@ fun writeOds(filePath: String, schuelerContainer: SchuelerContainer) {
     sheet.getCellByPosition(4,0).setStringValue("WPU1")
     sheet.getCellByPosition(5,0).setStringValue("WPU2")
 
-    val schuelerListe = schuelerContainer.getAll()
+    val schuelerListe = schuelerContainer.getAll().sortedBy { it.nachname }
 
     for ((index, schueler) in schuelerListe.withIndex()) {
         val row = index + 1
