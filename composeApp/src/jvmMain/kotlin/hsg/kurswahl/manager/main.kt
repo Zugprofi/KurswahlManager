@@ -22,21 +22,41 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.key.Key
 import hsg.pruefungs.planer.theme.AppTheme
+import hsg.kurswahl.manager.container.SchuelerContainer
+import hsg.kurswahl.manager.container.FachContainer
+import hsg.kurswahl.manager.dataFun.readOdsFromResources
+import hsg.kurswahl.manager.dataFun.writeOds
 
 fun main() = application {
+    val schuelerContainer by remember {mutableStateOf(SchuelerContainer())}
+    val fachContainer by remember {mutableStateOf(FachContainer())}
     Window(
         onCloseRequest = ::exitApplication,
         title = "KurswahlManager",
     ) {
         MenuBar {
             Menu("Datei", mnemonic = 'D') {
-                Item("Daten öffnen", onClick = {})
-                Item("Daten speichern", onClick = {})
+                Item("Daten öffnen", onClick = {
+                    readOdsFromResources(schuelerContainer)
+                    schuelerContainer.getAll().forEach { schueler ->
+                        schueler.fs3 = fachContainer.get(schueler.fs3Id)
+                        schueler.wpuWahl1Ids.forEach { fachId ->
+                            schueler.wpuWahl1.add(fachContainer.get(fachId)!!)
+                        }
+                        schueler.wpuWahl2Ids.forEach { fachId ->
+                            schueler.wpuWahl2.add(fachContainer.get(fachId)!!)
+                        }
+                    }
+                })
+                Item("Daten speichern", onClick = {
+                    val outputPath = "output.ods"
+                    writeOds(outputPath, schuelerContainer)
+                })
                 Item("Beenden", onClick = { exitApplication() })
             }
         }
         AppTheme {
-            App()
+            App(schuelerContainer, fachContainer)
         }
     }
 }
