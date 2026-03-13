@@ -22,6 +22,13 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.key.Key
 import hsg.pruefungs.planer.theme.AppTheme
+import hsg.kurswahl.manager.container.SchuelerContainer
+import hsg.kurswahl.manager.container.FachContainer
+import hsg.kurswahl.manager.dataFun.readOdsFromResources
+import hsg.kurswahl.manager.dataFun.writeOds
+
+val schuelerContainer = SchuelerContainer()
+val fachContainer = FachContainer()
 
 fun main() = application {
     Window(
@@ -30,13 +37,18 @@ fun main() = application {
     ) {
         MenuBar {
             Menu("Datei", mnemonic = 'D') {
-                Item("Daten öffnen", onClick = {})
-                Item("Daten speichern", onClick = {})
+                Item("Daten öffnen", onClick = {
+                    readOdsFromResources(schuelerContainer)
+                })
+                Item("Daten speichern", onClick = {
+                    val outputPath = "output.ods"
+                    writeOds(outputPath, schuelerContainer)
+                })
                 Item("Beenden", onClick = { exitApplication() })
             }
         }
         AppTheme {
-            App()
+            App(schuelerContainer, fachContainer)
         }
     }
 }

@@ -39,10 +39,11 @@ import hsg.kurswahl.manager.dataClass.Fach
 import hsg.kurswahl.manager.dataClass.Schueler
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun App(): String {
-
+fun App(
+    schuelerContainer: SchuelerContainer,
+    fachContainer: FachContainer
+) {
     var projectTitle by remember { mutableStateOf("unbenannt") }
     val scrollbarColor = MaterialTheme.colorScheme.secondary
     val scrollbarStyle = ScrollbarStyle(
@@ -61,9 +62,6 @@ fun App(): String {
     val textStyle = MaterialTheme.typography.labelLarge
     val mainTextColor = colorScheme.onPrimaryContainer
     val colorWarn = Color(0xFFF18F01)
-
-    var schuelerContainer by remember { mutableStateOf(SchuelerContainer()) }
-    var fachContainer by remember { mutableStateOf(FachContainer()) }
 
     val testSchueler = listOf(
         Schueler(
@@ -295,5 +293,4 @@ fun App(): String {
             }
         }
     }
-    return projectTitle
 }
